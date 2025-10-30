@@ -37,6 +37,15 @@ public class LunchRoundController {
         return ResponseEntity.ok(lunchRoundService.getAllRounds(user));
     }
 
+    @DeleteMapping("/{roundId}")
+    public ResponseEntity<Void> deleteRound(
+            @PathVariable Long roundId,
+            @AuthenticationPrincipal User user
+    ) {
+        lunchRoundService.deleteRound(roundId, user);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
+
 
 
     @PostMapping("/{roundId}/close")

@@ -29,6 +29,8 @@ public class MenuResponseDto {
         this.updatedAt = menu.getUpdatedAt();
         this.voteCount = voteCount;
         this.votedByMe = votedByMe;
+
+
     }
 }
 

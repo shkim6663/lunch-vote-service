@@ -2,17 +2,13 @@ package kr.sparta.lunchvote.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(
-        name = "vote",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "menu_id"})}
-)
-
 public class Vote {
 
     @Id
@@ -26,7 +22,15 @@ public class Vote {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
 }
+
 
 
 

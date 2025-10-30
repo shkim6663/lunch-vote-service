@@ -24,14 +24,14 @@ public class MenuController {
             @Valid @RequestBody MenuRequestDto requestDto,
             @AuthenticationPrincipal User user // JWT 인증 후 SecurityContext에서 가져오기
     ) {
-        return ResponseEntity.ok(menuService.createMenu(requestDto, user));
+        return ResponseEntity.ok(menuService.createMenu(requestDto));
     }
 
     @GetMapping
     public ResponseEntity<List<MenuResponseDto>> getAllMenus(
             @AuthenticationPrincipal User user // 로그인 사용자 정보 전달
     ) {
-        return ResponseEntity.ok(menuService.getAllMenus(user));
+        return ResponseEntity.ok(menuService.getAllMenus());
     }
 
 }

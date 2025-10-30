@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -64,9 +65,8 @@ public class LunchRoundService {
     public List<LunchRoundResponseDto> getTodayRounds(User user) {
         LocalDate today = LocalDate.now();
         List<LunchRound> rounds = lunchRoundRepository.findByDate(today);
-
         if (rounds.isEmpty()) {
-            throw new IllegalArgumentException("오늘의 라운드를 찾을 수 없습니다.");
+            throw new IllegalArgumentException("오늘의 라운드가 없습니다.");
         }
 
         return rounds.stream()
@@ -81,6 +81,23 @@ public class LunchRoundService {
                 .map(round -> new LunchRoundResponseDto(round, user, voteRepository))
                 .toList();
     }
+
+    // 라운드 삭제
+    @Transactional
+    public void deleteRound(Long roundId, User user) {
+        LunchRound round = lunchRoundRepository.findById(roundId)
+                .orElseThrow(() -> new IllegalArgumentException("라운드를 찾을 수 없습니다."));
+
+        // 요청한 유저가  확인
+        if (!round.getUser().getId().equals(user.getId())) {
+            throw new IllegalArgumentException("라운드를 삭제할 권한이 없습니다.");
+        }
+
+        // 삭제
+        lunchRoundRepository.delete(round);
+    }
+
+
 
 
     // 라운드 종료
