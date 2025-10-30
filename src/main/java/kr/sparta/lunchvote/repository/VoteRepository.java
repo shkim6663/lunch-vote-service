@@ -17,7 +17,7 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
 
     Optional<Vote> findByMenuAndUser(Menu menu, User user);
 
-    // 내가 투표한 내역 조회 (라운드 기준)
+    // 내가 투표한 내역 조회
     List<Vote> findAllByUserAndMenu_Round(User user, LunchRound round);
 }
 

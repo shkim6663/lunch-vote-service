@@ -29,7 +29,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String header = request.getHeader("Authorization");
 
-        // Authorization 헤더가 없거나 "Bearer "로 시작하지 않으면 통과
         if (header == null || !header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
@@ -43,7 +42,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        // 토큰에서 username(email) 추출
         String email = jwtUtil.getUsernameFromToken(token);
 
         // DB에서 사용자 조회
@@ -55,7 +53,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         User user = optionalUser.get();
 
-        // SecurityContext에 인증 정보 저장 (권한은 null)
         UsernamePasswordAuthenticationToken authToken =
                 new UsernamePasswordAuthenticationToken(user, null, null);
         SecurityContextHolder.getContext().setAuthentication(authToken);

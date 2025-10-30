@@ -25,7 +25,7 @@ public class VoteService {
     private final MenuRepository menuRepository;
     private final LunchRoundRepository lunchRoundRepository;
 
-    // 1️⃣ 투표 기능
+    // 1 투표 기능
     @Transactional
     public VoteResponseDto vote(VoteRequestDto requestDto, User user) {
         Menu menu = menuRepository.findById(requestDto.getMenuId())
@@ -46,7 +46,7 @@ public class VoteService {
         return new VoteResponseDto(vote.getId(), menu.getId(), vote.getCreatedAt());
     }
 
-    // 2️⃣ 내 투표 내역 조회
+    // 2 내 투표 내역 조회
     @Transactional(readOnly = true)
     public List<VoteResponseDto> getMyVotes(User user, Long roundId) {
         List<LunchRound> rounds;

@@ -18,7 +18,6 @@ public class MenuResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // Menu 객체 + vote 정보 받는 생성자
     public MenuResponseDto(Menu menu, int voteCount, boolean votedByMe) {
         this.id = menu.getId();
         this.name = menu.getName();

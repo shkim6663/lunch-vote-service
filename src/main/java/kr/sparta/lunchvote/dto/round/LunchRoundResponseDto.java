@@ -2,7 +2,6 @@ package kr.sparta.lunchvote.dto.round;
 
 import kr.sparta.lunchvote.dto.menu.MenuResponseDto;
 import kr.sparta.lunchvote.entity.LunchRound;
-import kr.sparta.lunchvote.entity.Menu;
 import kr.sparta.lunchvote.entity.User;
 import kr.sparta.lunchvote.repository.VoteRepository;
 import lombok.Getter;

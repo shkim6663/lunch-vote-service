@@ -15,7 +15,6 @@ public class TokenController {
         this.jwtService = jwtService;
     }
 
-    // POST로 JSON Body를 받아 처리
     @PostMapping("/refresh")
     public ResponseEntity<?> refreshToken(@RequestBody TokenRequestDto requestDto) {
         String newAccessToken = jwtService.refreshAccessToken(requestDto.getRefreshToken());
