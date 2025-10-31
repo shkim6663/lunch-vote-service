@@ -1,3 +1,49 @@
+## ER-DIAGRAM
+
+    erDiagram
+    USERS ||--o{ LUNCH_ROUND : creates
+    USERS ||--o{ VOTE : votes
+    LUNCH_ROUND ||--o{ MENU : contains
+    MENU ||--o{ VOTE : receives
+    
+    USERS {
+        bigint id PK
+        varchar email UK
+        varchar password
+        varchar name
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    LUNCH_ROUND {
+        bigint id PK
+        bigint user_id FK
+        date date
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    MENU {
+        bigint id PK
+        bigint round_id FK
+        varchar name
+        varchar type
+        int price
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    VOTE {
+        bigint id PK
+        bigint user_id FK
+        bigint menu_id FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+
+---
+
 ## 프로젝트 구조
     lunch-vote-service
     ├─ src
